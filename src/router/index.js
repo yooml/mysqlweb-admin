@@ -22,22 +22,33 @@ import Layout from '../views/layout/Layout'
   }
 **/
 export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
+  //{ path: '/login', component: () => import('@/views/login/index'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
 
   {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    name: 'Dashboard',
-    hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
-  },
-
-  {
+        path: '/',
+        component: Layout,
+        redirect: '/dashboard',
+        name: 'Dashboard',
+        hidden: false,
+        children: [{
+            path: 'dashboard',
+            component: () => import('@/views/nested/menu3/index')
+        }]
+    },
+    {
+        path: '/test',
+        component: Layout,
+        redirect: '/',
+        name: 'test',
+        hidden: false,
+        children: [{
+            path: 'table1',
+            component: () => import('@/views/test/table1/index'),
+            meta: { title: 'table'  ,icon: 'table'},
+        }]
+    },
+  /**{
     path: '/example',
     component: Layout,
     redirect: '/example/table',
@@ -71,18 +82,18 @@ export const constantRouterMap = [
       }
     ]
   },
-
+**/
   {
     path: '/nested',
     component: Layout,
-    redirect: '/nested/menu1',
+    redirect: '/nested/test3',
     name: 'Nested',
     meta: {
       title: 'Nested',
       icon: 'nested'
     },
     children: [
-      {
+     /** {
         path: 'menu1',
         component: () => import('@/views/nested/menu1/index'), // Parent router-view
         name: 'Menu1',
@@ -126,11 +137,16 @@ export const constantRouterMap = [
         path: 'menu2',
         component: () => import('@/views/nested/menu2/index'),
         meta: { title: 'menu2' }
-      }
+      },
+        **/{
+            path: 'menu2',
+            component: () => import('@/views/nested/menu3/index'),
+            meta: { title: 'test'  ,icon: 'table'}
+        }
     ]
   },
 
-  {
+  /**{
     path: 'external-link',
     component: Layout,
     children: [
@@ -139,7 +155,7 @@ export const constantRouterMap = [
         meta: { title: 'External Link', icon: 'link' }
       }
     ]
-  },
+  },**/
 
   { path: '*', redirect: '/404', hidden: true }
 ]
